@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+        <title>{block title|striptags}ČEPOS - Česká potravinářská obchodní a.s.{/block}</title>
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <link rel="stylesheet" href="{$basePath}/css/normalize.css">
+        <link rel="stylesheet" href="{$basePath}/css/main.css">
+        <script src="{$basePath}/js/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="{$basePath}/js/vendor/swfobject.js"></script>
+    </head>
+    <body>
+        <div id="container">
+            <header>
+                <p class="hidden">ČEPOS - Česká potravinářská obchodní a.s.</p>
+                <a id='logo' href="#"><img src="{$basePath}/img/logo.gif" width="154" height="59" alt="ČEPOS"></a>
+                <hr class="hidden">
+
+                <div id="languages">
+                    <a n:href="default, lang => cs">Česky</a> | <a n:href="default, lang => en">English</a>
+                </div>
+
+                {define menu}
+                <ul>
+                    {foreach $menu as $title => $url} 
+                        {if is_array($url)}
+                            <li><a>{$title}</a>{include #menu, menu => $url}
+                                {else}
+                            <li><a href="{$url}">{$title}</a></li>
+                            {/if}
+                            {if is_array($url)}
+                            </li>
+                        {/if}
+                    {/foreach}
+                </ul>   
+                {/define}
+
+                <nav>
+                    <div class="nav-menu">
+                        {include #menu, menu => $menu}
+                    </div>
+                </nav>
+            </header> 
+
+            <hr class="hidden">
+
+
+
+            <div id="content"  n:class="$asset->type == 'article-full' ? noSlider">
+                <article>
+                    {include #content}  
+                </article>
+
+                <div id="control">
+                    <a href="javascript:window.print()"><i class="icon print"></i>{_"Vytisknout"}</a>
+                    <a href="#" onclick="$('html,body').animate({scrollTop: 0}, 500, 'swing');
+                            return false;"><i class="icon up"></i>{_"Nahoru"}</a>
+                    <a href="javascript:history.back()"><i class="icon back"></i>{_"Zpět"}</a>
+                </div>
+            </div>
+
+            <hr class="hidden">
+
+            {if $asset->type != 'article-full'}
+                <div id="sidebar">
+                    <aside>
+                        {!$sidebar}
+
+                        <div id="map">
+                            <p>Pro zobrazeni interaktivní mapy potřebujete mít nainstalovaný Adobe Flash Player verze 9 nebo vyšší. Stáhněte si jej prosím <a href="http://get.adobe.com/flashplayer/">zde</a>.</p>
+                        </div>
+
+                        {snippet snippetMap}
+                            {ifset $map_detail}
+                                {foreach $map_detail as $item}
+                                    {if $iterator->first}
+                                        <div class="map-wrapper">
+                                            <img class="map-logo" src='/img/logos/{!$item->group}.jpg' width="90" height="60" alt="{$item->name}"> 
+
+                                            <div class="map-detail">
+                                                <h2>{$item->name}</h2>
+                                                <p>{$item->street}, {$item->city}<br />
+                                                    Web: <a href="{!$item->url}">{$item->url}</a></p>
+                                            </div>
+
+                                        </div>
+                                    {/if}
+                                    <div class="map-wrapper">
+                                        <img class="map-img" src='/img/icons/map_{!$item->type}.gif' width="60" height="19" alt="{$item->type}">     
+                                        <div class="map-detail">
+                                            <p>
+                                                <strong>{$item->name}</strong> <br />
+                                                {$item->street}, {$item->city}</p>
+                                        </div>
+                                    </div>
+
+                                {/foreach}
+                            {/ifset}
+                        {/snippet}
+
+                    </aside>
+
+                    <script>
+                        var premises = new Object();
+                        swfobject.embedSWF("../map/map_{!$lang}.swf?XMLData=../map.xml", 'map', "450", "310", "9", false, {}, {scale: 'noscale', menu: 'false', wmode: 'transparent'}, {});
+                        premises.show = function(param) {
+                           $.get("\/cs?param=" + param + "&do=map");
+                               }
+
+                    </script>
+                </div>
+            {/if}
+            <hr class="hidden">
+
+            <div id="footer">
+                <footer>Copyright © 2008 ČEPOS - Česká potravinářská obchodní a.s.</footer>
+            </div>
+        </div>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="{$basePath}/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+        <script src="{$basePath}/js/main.js"></script>
+        <script src="{$basePath}/js/nette.ajax.js"></script>
+
+        <script>
+            $(document).ready(function() {
+                if (location.pathname !== "/") {
+                    $('nav a[href^="/' + location.pathname.split("/")[1] + '/' + location.pathname.split("/")[2] + '"]').parents('li').children('a').addClass('active');
+                            } else
+                                $('nav a:eq(0)').addClass('active');
+
+                            $('a:not([href])').css('cursor', 'pointer');
+
+                        });
+
+
+        </script>
+
+    </body>
+</html>

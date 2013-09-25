@@ -1,0 +1,63 @@
+# Gettext keys exported by GettextTranslator and Translation Panel
+# Created: 2013-06-06 12:28:19
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2013-06-06 12:28+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4 ? 1 : 2));
+\n"
+
+
+msgid "Administration"
+msgstr "Administrace"
+
+msgid "Back to Site"
+msgstr "Zpět na stránky"
+
+msgid "Password"
+msgstr "Heslo"
+
+msgid "Password:"
+msgstr "Heslo"
+
+msgid "Please provide a password."
+msgstr "Prosím zadejte heslo"
+
+msgid "Please provide a username."
+msgstr "Prosím zadejte uživatelské jméno"
+
+msgid "Post"
+msgstr "Příspěvek"
+
+msgid "Remember me"
+msgstr "Neodhlašovat"
+
+msgid "Remember me on this computer"
+msgstr "Pamatovat si mě na tomto počítači"
+
+msgid "Save"
+msgstr "Uložit změny"
+
+msgid "Sign in"
+msgstr "Přihlásit se"
+
+msgid "Updated"
+msgstr "Změny byly uloženy"
+
+msgid "Username"
+msgstr "Uživatelské jméno"
+
+msgid "Username:"
+msgstr "Uživatelské jméno"
+
+msgid "You have been signed in."
+msgstr "Byl jste přihlášen"
+
+msgid "You have been signed out."
+msgstr "Byl jste odhlášen"
+

@@ -1,0 +1,32 @@
+{var $robots = noindex}
+{block #content}
+
+{var $phUsername = $template->translate("Username")}
+{var $phPassword = $template->translate("Password")}
+
+
+<div class="signin">
+    <div class="signin-box">
+        <h2 class="form-signin-heading sigin-brand">{_'Administration'}</h2>
+
+        {form signInForm class=>'form'}
+            <fieldset>
+                {input username, placeholder => $phUsername}
+                {input password, placeholder => $phPassword}
+
+                {input send class=>'btn btn-primary'}
+                <label class="remember">
+                    {input remember} 
+                    <strong class="remember-label">{_'Remember me'}</strong>
+                </label>
+            </fieldset>
+        {/form}
+    </div>
+
+</div>
+<div class="text-center">
+    <a n:href=":Front:Homepage:default">{_"Back to Site"}</a>
+</div>
+
+
+

@@ -1,0 +1,57 @@
+{block content}
+<h1>{_'File'}</h1>
+<hr />
+
+{form uploadForm class=>"form-horizontal"}
+    <div n:if="$form->hasErrors()">
+        <div class="alert alert-error" n:foreach="$form->errors as $error">{$error}</div>
+    </div>
+
+    <div class="control-group">
+        {label file class=>"control-label" /}
+        <div class="controls">
+            {input file }
+        </div>
+    </div>
+
+
+    <div class="control-group">
+        {label company class=>"control-label" /}
+        <div class="controls">
+            <label class="radio">
+                {input company}
+        </div>
+    </div>
+
+    <div class="control-group">
+        {label name class=>"control-label" /}
+        <div class="controls">
+            {input name class=>'file-name'}
+        </div>
+    </div>
+
+    <div class="control-group">
+        <div class="controls">
+            {input save class=>'btn btn-large btn-save span3'}
+        </div>
+    </div>
+{/form}
+
+<script>
+    $(function() {
+                var d = new Date();
+                    n = d.getMonth() + 1;
+                            y = d.getFullYear();
+
+                            $('input:radio').change(
+                                    function() {
+                            $('.file-name').val(this.value + '-' + n + '-' + y);
+                                            }
+                                    );
+
+                                    $('.file-name').val($('input:radio:checked').val() + '-' + n + '-' + y);
+                                });
+
+</script>
+
+{/block}

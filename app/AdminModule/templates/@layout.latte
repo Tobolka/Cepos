@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+
+        <meta name="description" content="ČEPOS">
+        <meta name="robots" content="{$robots}" n:ifset="$robots">
+
+        <title>{block title|striptags}ČEPOS{/block}</title>
+
+        <link rel="stylesheet" href="{$basePath}/cms/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{$basePath}/cms/css/todc-bootstrap.css">
+
+        <link rel="stylesheet" href="{$basePath}/cms/css/main.css">
+        <script src="{$basePath}/cms/js/jquery.js"></script>
+
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        {block head}{/block}
+    </head>
+
+    <body>
+        {snippet message}
+            <div n:foreach="$flashes as $flash" class="flash alert">{_$flash->message}</div>
+            <script>$('.alert').delay(2500).fadeOut('slow');</script>
+        {/snippet}
+
+        <div class="navbar navbar-googlenav navbar-inverse">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="brand" n:href="Asset:edit ,language => cs, id => 1, type => NULL">Administrace</a>
+
+                    <ul class="nav">
+                        <li n:class="$presenter->isLinkCurrent('Asset:*',array('language' => 'cs')) ? active">
+                            <a  n:href="Asset:edit ,language => cs, id => 1, type => NULL">České stránky</a>
+                        </li>
+                        <li n:class="$presenter->isLinkCurrent('Asset:*',array('language' => 'en')) ? active">
+                            <a  n:href="Asset:edit , language => en, id => 14, type => NULL">Anglické stránky</a>
+                        </li>
+
+                        <li n:class="$presenter->isLinkCurrent('File:*') ? active">
+                            <a  n:href="File:default">{_"Soubory"}</a>
+                        </li>
+                    </ul>
+
+                    <ul class="nav pull-right">
+                        <li><a n:href=":Front:Homepage:default">Stránky</a></li>
+                        <li><a n:href="Sign:out">Odhlásit se</a></li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+
+                {ifset $articles}
+                    <ul class="nav nav-list span3">
+                        {foreach $articles as $article}
+                            <li n:class="$presenter->isLinkCurrent('Asset:Edit',array('id' => $article->id)) ? active"><a n:href="Asset:edit $article->id">{$article->title}</a></li>
+                            {/foreach}
+                    </ul>
+                {/ifset}
+
+                <div class="span9 content">
+                    {include #content}
+                </div>
+
+            </div>
+        </div>
+
+        <script src="{$basePath}/cms/js/netteForms.js"></script>
+        <script src="{$basePath}/cms/js/main.js"></script>
+        <script src="{$basePath}/cms/js/bootstrap.min.js"></script>
+        <script src="{$basePath}/cms/js/nette.ajax.js"></script>
+
+    </body>
+</html>

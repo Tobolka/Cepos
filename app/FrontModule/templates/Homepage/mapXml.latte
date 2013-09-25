@@ -1,0 +1,14 @@
+{contentType application/xml}
+<?xml version="1.0"?>
+
+<groups>
+    {foreach $groups as $group}
+        <group id="{$group['id']}" city="{$group['city']}" street="{$group['street']}" url="{$group['url']}">
+
+            {foreach $group['items'] as $item}
+                <item id="{$item['id']}" name="{$item['name']}" city="{$item['city']}" street="{$item['street']}" url="{$item['url']}" type="{$item['type']}" x="{$item['x']}" y="{$item['y']}"/>
+            {/foreach}
+
+        </group>
+    {/foreach}
+</groups>

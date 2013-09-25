@@ -1,0 +1,29 @@
+{block content}
+<h1>{_"Seznam velkoobchodů"}</h1>
+
+{foreach $groups as $group}
+    <div class="wholesale-group">
+        <div class="map-wrapper">
+            <img class="map-logo" src='/img/logos/{!$group["id"]}.jpg' width="90" height="60" alt="{$group['name']}"> 
+            <div class="map-detail">
+                <h2>{$group['name']}</h2>
+                <p>{$group['street']}, {$group['city']}<br />
+                    Web: <a href="{!$group['url']}">{$group['url']}</a></p>
+            </div>
+        </div>
+
+
+        {foreach $group['items'] as $item}
+            <div class="map-wrapper">
+                <img class="map-img" src='/img/icons/map_{!$item["type"]}.gif' width="60" height="19" alt="{$item['type']}">     
+                <div class="map-detail">
+                    <p><strong>{$item['name']}</strong> <br />
+                        {$item['street']}, {$item['city']}</p>
+                </div>
+            </div>
+
+        {/foreach}
+    </div>
+{/foreach}
+
+{/block}

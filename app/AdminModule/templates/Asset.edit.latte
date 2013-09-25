@@ -1,0 +1,50 @@
+{block content}
+
+<link rel="stylesheet" href="{$basePath}/cms/js/redactor/redactor.css" />
+<script src="{$basePath}/cms/js/redactor/redactor.js"></script>
+<script src="{$basePath}/cms/js/redactor/cs.js"></script>
+
+{snippet editor}
+
+    <script type="text/javascript">
+
+        $(window).resize(function() {
+                            $('.redactor_box iframe').height($(document).height() - 201);
+                                    $('.redactor_box').height($(document).height() - 170);
+                                });
+
+                                $(function()
+            {
+                    $('.redactor').redactor({
+                            initCallback: function() {
+                                    $(window).resize();
+                                                },
+                                                iframe: true,
+                                                css: '/cms/css/editor.css',
+                                                lang: 'cs',
+                                                focus: true,
+                                                imageUpload: '/image_upload.php',
+                            //imageUpload: '?do=picture',
+                                        buttons: ['formatting', '|', 'bold', 'italic', 'deleted', '|',
+                                            'unorderedlist', 'orderedlist', 'outdent', 'indent', '|',
+                                            'image', 'video', 'table', 'link', '|',
+                                            'fontcolor', '|', 'html']
+                                    });
+                                    ;
+                                });
+
+    </script>
+
+    {form editForm class=>"ajax"}
+        <div n:if="$form->hasErrors()">
+            <div class="alert alert-error" n:foreach="$form->errors as $error">{$error}</div>
+        </div>
+        {input content }
+
+        {input save class=>'btn btn-large btn-save span3'}
+    {/form}
+{/snippet}
+
+
+
+{/block}
